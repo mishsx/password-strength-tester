@@ -5,10 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Strength</title>
+    <style>
+        *::before,
+        *::after,
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: hsl(261, 88%, 17%);
+            color: hsl(261, 88%, 90%);
+            text-align: center;
+        }
+
+        .strength-meter {
+            position: relative;
+            height: 2rem;
+            width: 90%;
+            border: 3px solid hsl(261, 88%, 57%);
+            border-radius: 1rem;
+            margin: 0 auto;
+            overflow: hidden;
+
+        }
+
+        .strength-meter::before {
+            --strength: 2;
+            content: '';
+            position: absolute;
+            left: 0;
+            height: 100%;
+            width: calc(1% * var(--strength, 0));
+            background-color: hsl(261, 88%, 67%);
+            transition: width 200ms;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Password Test</h1>
+    <h1>Password Strength Test</h1>
     <div class="strength-meter"></div>
     <input type="text" autofocus aria-labelledby="password">
     <div id="reasons" class="reasons"></div>
