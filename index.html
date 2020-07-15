@@ -1,53 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Password Strength</title>
     <style>
-        *::before,
-        *::after,
-        * {
-            box-sizing: border-box;
-        }
+      *::before,
+      *::after,
+      * {
+        box-sizing: border-box;
+      }
 
-        body {
-            background-color: hsl(261, 88%, 17%);
-            color: hsl(261, 88%, 90%);
-            text-align: center;
-        }
+      body {
+        background-color: hsl(261, 88%, 17%);
+        color: hsl(261, 88%, 90%);
+        text-align: center;
+      }
 
-        .strength-meter {
-            position: relative;
-            height: 2rem;
-            width: 90%;
-            border: 3px solid hsl(261, 88%, 57%);
-            border-radius: 1rem;
-            margin: 0 auto;
-            overflow: hidden;
+      .strength-meter {
+        position: relative;
+        height: 2rem;
+        width: 90%;
+        border: 3px solid hsl(261, 88%, 57%);
+        border-radius: 1rem;
+        margin: 0 auto;
+        overflow: hidden;
+      }
 
-        }
+      .strength-meter::before {
+        --strength: 2;
+        content: "";
+        position: absolute;
+        left: 0;
+        height: 100%;
+        width: calc(1% * var(--strength, 0));
+        background-color: hsl(261, 88%, 67%);
+        transition: width 200ms;
+      }
 
-        .strength-meter::before {
-            --strength: 2;
-            content: '';
-            position: absolute;
-            left: 0;
-            height: 100%;
-            width: calc(1% * var(--strength, 0));
-            background-color: hsl(261, 88%, 67%);
-            transition: width 200ms;
-        }
+      .password-input {
+        margin-top: 1rem;
+        width: 90%;
+        padding: 0.25rem 0.75rem;
+        background-color: hsl(261, 88%, 25%);
+        color: white;
+        border: 1px solid hsl(261, 88%, 57%);
+        outline: none;
+        text-align: center;
+        border-radius: 0.3rem;
+      }
+
+      .password-input:focus {
+        border-color: hsl(261, 88%, 70%);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Password Strength Test</h1>
     <div class="strength-meter"></div>
-    <input type="text" autofocus aria-labelledby="password">
+    <input
+      class="password-input"
+      id="password-input"
+      value="password"
+      type="text"
+      autofocus
+      aria-labelledby="password"
+    />
     <div id="reasons" class="reasons"></div>
-
-</body>
-
+  </body>
 </html>
