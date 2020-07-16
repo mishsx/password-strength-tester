@@ -8,6 +8,7 @@ function updateStrengthMeter() {
   const weaknesses = calculatePasswordStrength(passwordInput.value);
   let strength = 100;
   weaknesses.forEach((weakness) => {
+    if (weakness == null) return;
     strength -= weakness.deduction;
   });
   strengthMeter.style.setProperty("--strength", strength);
