@@ -3,6 +3,7 @@ const passwordInput = document.getElementById("password-input");
 const reasonsContainer = document.getElementById("reasons");
 
 passwordInput.addEventListener("input", updateStrengthMeter);
+updateStrengthMeter();
 
 function updateStrengthMeter() {
   const weaknesses = calculatePasswordStrength(passwordInput.value);
