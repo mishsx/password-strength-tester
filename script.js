@@ -25,6 +25,7 @@ function calculatePasswordStrength(password) {
   weaknesses.push(lowerCaseWeakness(password));
   weaknesses.push(upperCaseWeakness(password));
   weaknesses.push(numberWeakness(password));
+  weaknesses.push(specialCharacterWeakness(password));
   return weaknesses;
 }
 
@@ -96,6 +97,14 @@ function upperCaseWeakness(password) {
 
 function numberWeakness(password) {
   return characterTypeWeakness(password, /[0-9]/g, "numbers.");
+}
+
+function specialCharacterWeakness(password) {
+  return characterTypeWeakness(
+    password,
+    /[^0-9A-Za-z\s]/g,
+    "special characters."
+  );
 }
 
 function characterTypeWeakness(password, regex, type) {
