@@ -8,9 +8,13 @@ updateStrengthMeter();
 function updateStrengthMeter() {
   const weaknesses = calculatePasswordStrength(passwordInput.value);
   let strength = 100;
+  reasonsContainer.innerHTML = "";
   weaknesses.forEach((weakness) => {
     if (weakness == null) return;
     strength -= weakness.deduction;
+    const messageElement = document.createElement("div");
+    messageElement.innerText = weakness.message;
+    reasonsContainer.appendChild(messageElement);
   });
   strengthMeter.style.setProperty("--strength", strength);
 }
