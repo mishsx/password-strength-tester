@@ -2,10 +2,16 @@ const strengthMeter = document.getElementById("strength-meter");
 const passwordInput = document.getElementById("password-input");
 const reasonsContainer = document.getElementById("reasons");
 
-passwordInput.addEventListener("input", () => {
+passwordInput.addEventListener("input", updateStrengthMeter);
+
+function updateStrengthMeter() {
   const weaknesses = calculatePasswordStrength(passwordInput.value);
-  console.log(weaknesses);
-});
+  let strength = 100;
+  weaknesses.forEach((weakness) => {
+    strength -= weakness.deduction;
+  });
+  strengthMeter.style.setProperty("--strength", strength);
+}
 
 function calculatePasswordStrength(password) {
   const weaknesses = [];
