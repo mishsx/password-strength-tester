@@ -26,6 +26,7 @@ function calculatePasswordStrength(password) {
   weaknesses.push(upperCaseWeakness(password));
   weaknesses.push(numberWeakness(password));
   weaknesses.push(specialCharacterWeakness(password));
+  weaknesses.push(repeatCharacterWeakness(password));
   return weaknesses;
 }
 
@@ -120,6 +121,16 @@ function characterTypeWeakness(password, regex, type) {
     return {
       message: `Your password could use more ${type}`,
       deduction: 5,
+    };
+  }
+}
+
+function repeatCharacterWeakness(password) {
+  const matches = password.match(/(.)\1/g) || [];
+  if (matches.length > 0) {
+    return {
+      message: `Your password has repeat characters.`,
+      deduction: matches.length * 10,
     };
   }
 }
